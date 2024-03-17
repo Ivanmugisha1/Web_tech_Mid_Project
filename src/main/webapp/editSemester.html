@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Teacher</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-4">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="teacherModalLabel">Edit Semester</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form for adding a new teacher -->
+                <form id="addTeacherForm" method="post" action="edit-semester">
+
+                    <div class="form-group">
+                        <label for="semesterId">Semester ID</label>
+                        <input type="number" class="form-control" id="semesterId" name="semesterId" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="semesterCode">Semester Code</label>
+                        <input type="text" class="form-control" id="semesterCode" name="semesterCode" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="semesterName">Course Name</label>
+                        <input type="text" class="form-control" id="semesterName" name="semesterName" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="startDate">Start Code</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endDate">End date</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate" >
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+
+</body>
+</html>

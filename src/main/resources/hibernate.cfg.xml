@@ -1,0 +1,34 @@
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/jonath</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">07288</property>
+
+        <!-- JDBC connection pool settings (optional) -->
+        <property name="hibernate.connection.pool_size">5</property>
+
+        <!-- SQL dialect for PostgreSQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!-- Echo all executed SQL to stdout (optional) -->
+        <property name="hibernate.show_sql">true</property>
+
+        <!-- Automatically create or update database schema -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Mapping -->
+        <mapping class="com.example.mymidexam.modal.User"/>
+        <mapping class="com.example.mymidexam.modal.Course"/>
+        <mapping class="com.example.mymidexam.modal.CourseDefinition"/>
+        <mapping class="com.example.mymidexam.modal.Teacher"/>
+        <mapping class="com.example.mymidexam.modal.Semester"/>
+        <mapping class="com.example.mymidexam.modal.AcademicUnit"/>
+        <mapping class="com.example.mymidexam.modal.Student"/>
+        <mapping class="com.example.mymidexam.modal.StudentCourse"/>
+        <mapping class="com.example.mymidexam.modal.StudentRegistration"/>
+    </session-factory>
+</hibernate-configuration>

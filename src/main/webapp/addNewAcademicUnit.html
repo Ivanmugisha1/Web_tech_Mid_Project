@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Academic Unit</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Add New Academic Unit</h2>
+    <form id="newAcademicUnitForm" method="post" action="new-academic">
+        <div class="form-group">
+            <label for="academicCode">Academic Code:</label>
+            <input type="text" class="form-control" id="academicCode" name="academicCode" required>
+        </div>
+        <div class="form-group">
+            <label for="academicName">Academic Name:</label>
+            <input type="text" class="form-control" id="academicName" name="academicName" required>
+        </div>
+        <div class="form-group">
+            <label for="type">Academic Type:</label>
+            <select class="form-control" id="type" name="type" required>
+                <!-- Options will be populated dynamically -->
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+<!-- Optional JavaScript, but may be required if you want to add client-side validation or other features -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Fetch AcademicUnitType values from the servlet using AJAX
+    fetch('AcademicUnitTypeValuesServlet')
+        .then(response => response.json())
+        .then(data => {
+            const typeSelect = document.getElementById('type');
+            data.forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                typeSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching AcademicUnitType values:', error));
+
+    // Event listener to capture selected value
+    document.getElementById('type').addEventListener('change', function() {
+        const selectedType = this.value;
+        console.log('Selected academic unit type:', selectedType);
+    });
+</script>
+
+</body>
+</html>

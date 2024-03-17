@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Courses</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Manage Courses</h2>
+
+    <!-- Student table -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Course Definition Name</th>
+            <th>Description</th>
+
+
+        </tr>
+        </thead>
+        <tbody id="courseDefinitionTableBody">
+        <!-- Student data will be populated here -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script>
+    // Function to fetch and display students
+    function fetchCourseDefinition() {
+        fetch('/manage-courseDefinition') // Assuming this is the endpoint to get all students
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('courseDefinitionTableBody').innerHTML = data;
+            })
+            .catch(error => console.error('Error fetching CourseDefinition:', error));
+    }
+
+    // Call the function when the page loads
+    window.onload = fetchCourseDefinition;
+</script>
+</body>
+</html>

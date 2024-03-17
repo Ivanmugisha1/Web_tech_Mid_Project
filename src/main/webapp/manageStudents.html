@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Students</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            margin-top: 60px; /* Adjust according to navbar height */
+            padding: 20px;
+        }
+        .student-list {
+            margin-top: 20px;
+        }
+        .student-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Admin Dashboard</a>
+    <!-- Navbar content here -->
+</nav>
+
+<!-- Page content -->
+<div class="content">
+    <div class="container">
+        <h1>Manage Students</h1>
+        <a href="addNewStudentForm.html" class="btn btn-primary">Create new</a>
+        <!-- Search Form -->
+        <form id="searchForm">
+            <div class="form-group">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search by name...">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <!-- Student List -->
+        <div class="student-list">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date of Birth</th>
+                </tr>
+                </thead>
+                <tbody id="studentTableBody">
+                <!-- Student data will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Buttons for New Student and Edit -->
+        <div class="mt-3">
+
+            <button id="editStudentBtn" class="btn btn-primary">Edit Student</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for New/Edit Student -->
+<div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModalLabel" aria-hidden="true">
+    <!-- Modal content here -->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        // Load student list on page load
+        loadStudents();
+
+        // Search form submission
+        $('#searchForm').submit(function(event){
+            event.preventDefault();
+            var searchTerm = $('#searchInput').val().trim();
+            searchStudents(searchTerm);
+        });
+
+
+
+        // Edit Student button click
+        $('#editStudentBtn').click(function(){
+            // Logic for fetching selected student data and loading it into the modal for editing
+            // Example: $('#studentModal').load('editStudentForm.html', function(){ ... });
+        });
+    });
+
+    $(document).ready(function(){
+        // Load student list on page load
+        loadStudents();
+
+        // Function to load students
+        function loadStudents() {
+            $.getJSON('students', function(students){
+                $('#studentTableBody').empty();
+                students.forEach(function(student){
+                    var studentRow = '<tr>';
+                    studentRow += '<td>' + student.studentId + '</td>';
+                    studentRow += '<td>' + student.firstname + '</td>';
+                    studentRow += '<td>' + student.lastname + '</td>';
+                    studentRow += '<td>' + formatDate(student.dob) + '</td>';
+                    studentRow += '</tr>';
+                    $('#studentTableBody').append(studentRow);
+                });
+            });
+        }
+
+        // Function to format date
+        function formatDate(dateString) {
+            var date = new Date(dateString);
+            var year = date.getFullYear();
+            var month = (date.getMonth() + 1).toString().padStart(2, '0');
+            var day = date.getDate().toString().padStart(2, '0');
+            return year + '-' + month + '-' + day;
+        }
+    });
+
+
+    function searchStudents(searchTerm) {
+        // Ajax request to search for students with given search term
+        $.getJSON('students?action=findByName&name=' + searchTerm, function(students){
+            $('.student-list').empty();
+            students.forEach(function(student){
+                var studentItem = '<div class="student-item">';
+                studentItem += '<p>Name: ' + student.firstname + ' ' + student.lastname + '</p>';
+                studentItem += '<p>ID: ' + student.studentId + '</p>';
+                studentItem += '<p>Date of Birth: ' + student.dob + '</p>';
+                studentItem += '</div>';
+                $('.student-list').append(studentItem);
+            });
+        });
+    }
+</script>
+</body>
+</html>
+
