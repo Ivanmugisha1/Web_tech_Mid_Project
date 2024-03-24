@@ -4,9 +4,9 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/jonath</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/ivan</property>
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">07288</property>
+        <property name="hibernate.connection.password">12345</property>
 
         <!-- JDBC connection pool settings (optional) -->
         <property name="hibernate.connection.pool_size">5</property>
